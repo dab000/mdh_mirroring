@@ -10,6 +10,7 @@ rm /n/fawzi_lab/mdh_transfer_scripts/latestrun.log
 #First copy the currently in place directory to a single backup deleting extraneous files from the receiving directory
 #This gives you two copies the current one and the previous weeks - this can be abandoned if space becomes an issue
 rsync -a --delete /n/fawzi_lab/mdh_current/* /n/fawzi_lab/mdh_backup
+rsync -a --delete /n/fawzi_lab/pns_current/* /n/fawzi_lab/pns_backup
 
 # Stage files from haven.bwh.harvard.edu in a scratch directory 
 # This minimizes the amount of time that the files will not be in their expected directories.
@@ -17,6 +18,7 @@ rsync -a --delete /n/fawzi_lab/mdh_current/* /n/fawzi_lab/mdh_backup
 
 #Clear out the staging directory before pulling data from haven
 rm -rf /n/fawzi_lab/mdh_transfer_scripts/mdh_transfer_scratch/* #make sure its empty before we sftp into it 
+rm -rf /n/fawzi_lab/mdh_transfer_scripts/pns_transfer_scratch/*
 
 # SFTP is the only option for transferring files from haven
 # The batch file mdh_transfer_batch_file.txt coordinates from where and to where the sftp command gets and puts data
@@ -25,12 +27,23 @@ rm -rf /n/fawzi_lab/mdh_transfer_scripts/mdh_transfer_scratch/* #make sure its e
 # Now rsync from the scratch location to the expected location deleting extraneous files in the receiving directory (--delete)
 # and removing succesfully transfered files from the source directory (ie the scratch dir) (--remove-source-files)
 
-
+#MDH
 rsync -a --remove-source-files --delete /n/fawzi_lab/mdh_transfer_scripts/mdh_transfer_scratch/* /n/fawzi_lab/mdh_current
 rm /n/fawzi_lab/mdh_current/date_transferred_to_odyssey
 
+#PNS 
+rsync -a --remove-source-files --delete /n/fawzi_lab/mdh_transfer_scripts/pns_transfer_scratch/* /n/fawzi_lab/pns_current
+rm /n/fawzi_lab/pns_current/date_transferred_to_odyssey
+
+
 
 #finally put a timestamp on the most recent transfer
+
+#MDH
 echo "This data was received from the channing on: " >> /n/fawzi_lab/mdh_current/date_transferred_to_odyssey
 date >> /n/fawzi_lab/mdh_current/date_transferred_to_odyssey
+
+#PNS
+echo "This data was received from the channing on: " >> /n/fawzi_lab/pns_current/date_transferred_to_odyssey
+date >> /n/fawzi_lab/pns_current/date_transferred_to_odyssey
 
