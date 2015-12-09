@@ -1,0 +1,1 @@
+get /sftp/Projects/Mngt_Dvlpmt4Health/Current_MDH/* /n/fawzi_lab/mdh_transfer_scripts/mdh_transfer_scratch
