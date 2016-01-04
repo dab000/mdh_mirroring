@@ -1,2 +1,3 @@
 get /sftp/Projects/Mngt_Dvlpmt4Health/Current_MDH/* /n/fawzi_lab/mdh_transfer_scripts/mdh_transfer_scratch
 get /sftp/Projects/Mngt_Dvlpmt4Health/PNS_final/* /n/fawzi_lab/mdh_transfer_scripts/pns_transfer_scratch
+get /sftp/Projects/Mngt_Dvlpmt4Health/macros/* /n/fawzi_lab/mdh_transfer_scripts/macros_transfer_scratch
